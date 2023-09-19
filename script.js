@@ -1,1 +1,0 @@
-console.log("text from script.js")
