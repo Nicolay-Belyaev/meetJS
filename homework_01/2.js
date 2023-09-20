@@ -10,4 +10,4 @@
 const name = "Nikolay";
 const admin = name;
 
-console.log(admin)
+console.log(admin);

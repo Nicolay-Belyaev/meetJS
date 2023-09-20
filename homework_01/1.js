@@ -16,4 +16,4 @@
 const tempC = prompt("Введите температуру в градусах Цельсия:");
 const tempF = (9 / 5) * tempC + 32;
 
-alert(`Цельсий: ${tempC}, Фаренгейт: ${tempF}`)
+alert(`Цельсий: ${tempC}, Фаренгейт: ${tempF}`);
