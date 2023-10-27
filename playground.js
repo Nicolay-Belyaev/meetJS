@@ -1,29 +1,36 @@
-const divContent = document.querySelector(".content");
-const someParagraph = document.createElement("p");
-someParagraph.textContent = "Some text in paragraph";
+// Создать в html список состоящий из 3-х произвольных элементов li
+// Нужно создать кнопку которая будет добавлять элементы списка с текстом “новый элемент списка”
+// Создать кнопку, которая будет удалять первый элемент из созданного списка
+// Создать кнопку, при клике на которую ей добавляется класс “click”
 
-const button = document.createElement('button');
-button.textContent = "Send";
-button.onclick = () => {
-    button.textContent = "Text sent!";
-}
+const list = document.querySelector(".list");
 
-const anotherButton = document.createElement("button");
-anotherButton.state = "not-clicked";
-anotherButton.textContent = "Show text";
-anotherButton.onclick = () => {
-    if (anotherButton.state === "not-clicked") {
-        anotherButton.state = "clicked";
-        anotherButton.textContent = "Hide text";
-        divContent.append(someParagraph);
-        return;
-    }
-    anotherButton.state = "not-clicked";
-    anotherButton.textContent = "Show text";
-    divContent.removeChild(someParagraph);
-}
+const addButton = document.createElement("button");
+addButton.classList.add("addButton");
+addButton.textContent = "Добавить новый элемент";
 
-divContent.append(button);
-divContent.append(anotherButton);
+addButton.addEventListener("click", () => {
+    const newListElement = document.createElement("li");
+    newListElement.textContent = "новый элемент списка";
+    list.append(newListElement);
+})
+
+document.body.append(addButton);
+
+const removeButton = document.createElement("button");
+removeButton.classList.add("removeButton");
+removeButton.textContent = "Удалить верхний элемент";
+
+removeButton.addEventListener("click", () => {
+    list.children[0].remove();
+})
+document.body.append(removeButton);
 
 
+const classButton = document.createElement("button");
+classButton.textContent = "Добавить класс"
+classButton.addEventListener("click", () => {
+    classButton.classList.add("click")
+})
+
+document.body.append(classButton);
