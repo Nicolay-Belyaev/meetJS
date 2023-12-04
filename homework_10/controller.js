@@ -1,0 +1,3 @@
+getAllCharacter().then(() =>
+    catalogGenerator(characters)
+)

@@ -1,0 +1,29 @@
+.container {
+    margin: 0 auto;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.outer {
+    border: 1px solid gray;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.name {
+    font-weight: 700;
+}
+
+.status__alive {
+    color: green;
+}
+
+.status__dead {
+    color: red;
+}
