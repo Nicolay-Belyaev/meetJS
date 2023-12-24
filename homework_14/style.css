@@ -1,0 +1,15 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    gap: 30px;
+}
+
+.card {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 2px black solid;
+    border-radius: 15px;
+    width: 300px;
+}
