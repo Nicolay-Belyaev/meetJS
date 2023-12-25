@@ -5,9 +5,14 @@ const doggoConveyor = () => {
 
 const getDoggo = () => {
     fetch("https://dog.ceo/api/breeds/image/random")
-        .catch(() => getDoggo())
         .then(result => result.json())
-        .then(doggoMsg => doggoRender(doggoMsg.message))
+        .then(doggoMsg => {
+            // иногда бэк успешно отдает ссылку на пёселя, но картинки оп ссылке на бэке нету.
+            // поэтому мы фетчим непосредственно линк картинки, и если пёсель потерялся, просим у бэка нового.
+            fetch(`${doggoMsg.message}`)
+                .then(() => doggoRender(doggoMsg.message))
+                .catch(() => getDoggo())
+        })
 }
 
 const doggoRender = (doggo) => {
