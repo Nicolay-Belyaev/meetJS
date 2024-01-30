@@ -15,9 +15,7 @@ class Library {
     #books = [];
 
     constructor(booksPile) {
-        booksPile.forEach((book) => {
-            if (this.hasBook(book) === false) {this.#books.push(book)}
-        })}
+        booksPile.forEach((book) => {this.addBook(book)})}
 
     get allBooks () {return this.#books;}
 
@@ -26,7 +24,7 @@ class Library {
             if (!(newBook instanceof Book)) {
                 throw new Error("Can't add your book: Library can contain Books only.");
             }
-            if (this.#books.some((book) => book.isEqual(newBook))) {
+            if (typeof this.hasBook(newBook) == "number") {
                 throw new Error("Can't add your book: Library already contains this book.")
             }
         } catch (error) {
@@ -42,26 +40,30 @@ class Library {
             indexBook = index;
             return book.isEqual(soughtBook);
         });
-        return res ? indexBook : false;
+        return (res ? indexBook : false);
     }
 
     removeBook(deletedBook) {
-        let removedBook = [];
-        this.#books.forEach((book) => {
-            if (book.isEqual(deletedBook)) {
-                removedBook = this.#books.splice(this.#books.indexOf(book), 1)
-            }
-        })
+        let bookIndexOrFalse = this.hasBook(deletedBook); // 0
         try {
-            if (removedBook.length === 0) throw new Error("Can't delete your book: there's no such book in Library.");
+            if (typeof bookIndexOrFalse !== "number") {
+                throw new Error("Can't delete your book: there's no such book in Library.")
+            }
+        } catch (error) {
+            console.log(error.message);
+            return;
         }
-        catch (error) {console.log(error.message);}
+        this.#books.splice(bookIndexOrFalse, 1)
     }
 }
 
-const book1 = new Book("123", "321")
-const book2 = new Book("123", "321")
+const book1 = new Book("1", "1")
+const book2 = new Book("2", "2")
+const book3 = new Book("3", "3")
 
-const lib = new Library([book1, book2])
+const lib = new Library([book1, book1, book2, book3])
 
+console.log(lib.allBooks)
+console.log(lib.hasBook(book2))
+lib.removeBook(book2);
 console.log(lib.allBooks)
