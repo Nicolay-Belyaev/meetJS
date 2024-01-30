@@ -16,11 +16,9 @@ class Library {
 
     constructor(booksPile) {
         booksPile.forEach((book) => {
-            if (this.hasBook(book) === false) {
-                this.#books.push(book)
-            }
-        })
-    }
+            if (this.hasBook(book) === false) {this.#books.push(book)}
+        })}
+
     get allBooks () {return this.#books;}
 
     addBook(newBook) {

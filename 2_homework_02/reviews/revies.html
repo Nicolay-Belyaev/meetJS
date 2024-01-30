@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="product">
+        <div class="product__img">
+            <img src="box.jpg"
+                 alt="product-img">
+        </div>
+        <div class="reviews_wrapper">
+            <input type="text" class="product__input" placeholder="место для вашего отзыва">
+            <p class="error"></p>
+            <button class="product__submit">Отправить отзыв</button>
+
+        </div>
+        <div class="product__reviews"></div>
+    </div>
+
+    <script>
+        const input = document.querySelector(".product__input");
+        const button = document.querySelector(".product__submit");
+        const reviews = document.querySelector(".product__reviews");
+        const errormsg = document.querySelector(".error")
+
+        button.addEventListener("click", () => {
+            try {
+                if (input.value.length < 50 || input.value.length > 500) {
+                    throw new Error("длинна отзыва должна быть от 50 до 500 символов.")
+                }
+            } catch (error) {
+                errormsg.textContent = error.message;
+                return;
+            }
+            errormsg.textContent = "";
+            const review = document.createElement("div");
+            review.className = "review";
+            review.textContent = input.value;
+            reviews.append(review);
+        })
+    </script>
+</body>
+</html>
+
