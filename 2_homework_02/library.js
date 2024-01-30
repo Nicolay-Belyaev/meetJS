@@ -37,7 +37,12 @@ class Library {
     }
 
     hasBook(soughtBook) {
-        return this.#books.some((book) => book.isEqual(soughtBook))
+        let indexBook;
+        let res = this.#books.some((book, index) => {
+            indexBook = index;
+            return book.isEqual(soughtBook);
+        });
+        return res ? indexBook : false;
     }
 
     removeBook(deletedBook) {
@@ -53,3 +58,10 @@ class Library {
         catch (error) {console.log(error.message);}
     }
 }
+
+const book1 = new Book("123", "321")
+const book2 = new Book("123", "321")
+
+const lib = new Library([book1, book2])
+
+console.log(lib.allBooks)
