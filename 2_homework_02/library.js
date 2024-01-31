@@ -27,11 +27,10 @@ class Library {
             if (typeof this.hasBook(newBook) == "number") {
                 throw new Error("Can't add your book: Library already contains this book.")
             }
+            this.#books.push(newBook);
         } catch (error) {
             console.log(error.message);
-            return;
         }
-        this.#books.push(newBook);
     }
 
     hasBook(soughtBook) {
@@ -49,11 +48,10 @@ class Library {
             if (typeof bookIndexOrFalse !== "number") {
                 throw new Error("Can't delete your book: there's no such book in Library.")
             }
+            this.#books.splice(bookIndexOrFalse, 1)
         } catch (error) {
             console.log(error.message);
-            return;
         }
-        this.#books.splice(bookIndexOrFalse, 1)
     }
 }
 
