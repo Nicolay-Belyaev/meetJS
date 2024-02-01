@@ -11,5 +11,6 @@ submitButton.addEventListener("click", () => {
        allView[productInput.value] ? [...allView[productInput.value], reviewInput.value] : [reviewInput.value];
 
    localStorage.setItem("allView", JSON.stringify(allView));
+   productInput.value = reviewInput.value = "";
 });
 
