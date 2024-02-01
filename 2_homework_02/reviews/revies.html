@@ -34,15 +34,14 @@
                 if (input.value.length < 50 || input.value.length > 500) {
                     throw new Error("длинна отзыва должна быть от 50 до 500 символов.")
                 }
+                errormsg.textContent = "";
+                const review = document.createElement("div");
+                review.className = "review";
+                review.textContent = input.value;
+                reviews.append(review);
             } catch (error) {
                 errormsg.textContent = error.message;
-                return;
             }
-            errormsg.textContent = "";
-            const review = document.createElement("div");
-            review.className = "review";
-            review.textContent = input.value;
-            reviews.append(review);
         })
     </script>
 </body>

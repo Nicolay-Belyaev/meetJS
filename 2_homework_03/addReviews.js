@@ -12,3 +12,4 @@ submitButton.addEventListener("click", () => {
 
    localStorage.setItem("allView", JSON.stringify(allView));
 });
+

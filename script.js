@@ -1,47 +1,40 @@
-const mergeArrays= (firstArray, secondArray) => {
-    return [...firstArray, ...secondArray]
+const mockDatabase = [
+    { title: "Новость 1", content: "Содержимое новости 1..." },
+    { title: "Новость 2", content: "Содержимое новости 2..." },
+];
+
+const fetchNews = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (Math.random() < 0.1) {
+                reject("Ошибка загрузки новостей");
+            } else {
+                resolve(mockDatabase);
+            }
+        }, 1000)
+    })
 }
 
-const removeDuplicates = (...args) => {
-    return args.filter((element, index) => args.indexOf(element) === index);
+const renderNews = (news) => {
+    return (
+        `<div>${news.title}</div> 
+        <div>${news.content}</div>`
+    );
+
+
 }
 
-const getEvenNumbers = (array) => {
-    return array.filter(element => element % 2 === 0);
-}
-
-const calculateAverage = (array) => {
-    return array.reduce((acc, currentValue) => acc + currentValue, 0) / array.length;
-}
-
-const capitalizeFirstLetter = (string) => {
-    return string.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-}
-
-const createCalculator = (incomingNumber) => {
-    return {
-        add: (arg) => {incomingNumber += arg},
-        subtract: (arg) => {incomingNumber -= arg},
-        getNumber: () => {return incomingNumber}
-    }
-}
-
-const createGreeting = (name) => {
-    return () => {
-        console.log(`Hello, ${name}`)
-    }
-}
-
-const createPasswordChecker = (passLength) => {
-    return (password) => {
-        return password.length >= passLength;
-    }
-}
-
-const sumDigits = (number) => {
-    if (number < 10) {return number}
-    return number % 10 + sumDigits(Math.trunc(number / 10))
-}
-
-
-
+const btn = document.querySelector("#addNews");
+const newsDiv = document.querySelector(".news");
+btn.addEventListener("click", () => {
+    btn.disabled = true;
+    fetchNews()
+        .then(data => {data.forEach((news) => {
+           newsDiv.insertAdjacentHTML("beforeend", renderNews(news))
+        }
+        )})
+        .catch(error => {alert(error)})
+        .finally(() => {
+            btn.disabled = false
+        })
+})
