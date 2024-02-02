@@ -10,12 +10,21 @@ productsNames.forEach((product) => {
     const ul = document.createElement("ul");
 
     div.append(headline, ul);
-    div.addEventListener("click", ({target}) => renderViewsList(product))
+    div.addEventListener("click", ({target}) => {
+        if (target.tagName === "P") {
+            ul.insertAdjacentHTML(renderViewsList(product));
+        }
+    });
     headline.textContent = `${product}`;
     viewsDiv.append(div);
 })
 
 const renderViewsList = (product) => {
     const productViews = JSON.parse(localStorage.getItem(product));
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    const removeBtn = document.createElement("button");
+
+
 
 }
