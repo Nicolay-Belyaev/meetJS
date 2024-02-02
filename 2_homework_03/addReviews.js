@@ -4,13 +4,12 @@ const submitButton = document.querySelector("#add-review");
 const localStorage = window.localStorage;
 
 submitButton.addEventListener("click", () => {
-   if (localStorage.getItem("allView") == null) {localStorage.setItem("allView", "{}");}
+   if (localStorage.getItem(`${productInput.value}`) == null) {localStorage.setItem(`${productInput.value}`, "[]");}
 
-   const allView = JSON.parse(localStorage.getItem("allView"));
-   allView[productInput.value] =
-       allView[productInput.value] ? [...allView[productInput.value], reviewInput.value] : [reviewInput.value];
+   const productViews = JSON.parse(localStorage.getItem(`${productInput.value}`));
+   console.log(productViews);
+   productViews.push(reviewInput.value);
 
-   localStorage.setItem("allView", JSON.stringify(allView));
+   localStorage.setItem(`${productInput.value}`, JSON.stringify(productViews));
    productInput.value = reviewInput.value = "";
 });
-
