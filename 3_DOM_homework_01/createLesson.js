@@ -1,27 +1,45 @@
-export const createLesson = ({name, time, maxParticipants, currentParticipants, imgPath}) => {
-    let btnStatus;
-    let allBooked = "";
-    if (currentParticipants === maxParticipants) {
-        btnStatus = "disabled";
-        allBooked = "<div class='allBooked'>Все места на занятии заняты</div>"
-    }
+import {bookButton} from "./bookButton.js";
 
-    return(
-        `<div class="wrapper">` +
-        `    <div class="lesson_description">` +
-        `        <h2 class="lesson_name">${name}</h2>` +
-        `        <img src="${imgPath}" alt="" class="lesson_img">` +
-        `        <span class="lesson_time">Время занятия: ${time}</span>`+
-        `    </div>` +
-        `    <div class="lesson_participants">` +
-        `        <span class="lesson_participants-max">Максимум участников: ${maxParticipants}</span>`+
-        `        <span class="lesson_participants-current">Участников сейчас: ${currentParticipants}</span>`+
-        `    </div>`+
-        `    <div class="lesson_buttons">` +
-        `        <button ${btnStatus} class="btn btn__book-lesson">Записаться</button>`+
-        `        <button disabled class="btn btn__unbook-lesson">отменить запись</button>`+
-        `    </div>`+
-        `    ${allBooked}` +
-        `</div>`
-    )
+export const createLesson = ({id, name, time, maxParticipants, currentParticipants, imgPath}) => {
+    const wrapper = document.createElement("div");
+        const description = document.createElement("div");
+            const headline = document.createElement("h2");
+            const img = document.createElement("img");
+            const timeSpan = document.createElement("span");
+        const participants = document.createElement("div");
+            const maxParticipantsSpan = document.createElement("span");
+            const currentParticipantsSpan = document.createElement("span");
+        const buttons = document.createElement("div");
+            const reservButton = bookButton(id);
+            const unBookButton = document.createElement("button");
+
+    wrapper.className = "wrapper";
+        description.className = "lesson_description";
+            headline.className = "lesson_name";
+            headline.innerText = `${name}`;
+            img.className = "lesson_img";
+            img.src = `${imgPath}`;
+            timeSpan.className = "lesson_time";
+            timeSpan.innerText = `Время занятия: ${time}`;
+        participants.className = "lesson_participants";
+            maxParticipantsSpan.className = "lesson_participants-max";
+            currentParticipantsSpan.className = "lesson_participants-current";
+            maxParticipantsSpan.innerText = `Максимум участников: ${maxParticipants}`;
+            currentParticipantsSpan.innerText = `Участников сейчас: ${currentParticipants}`;
+        buttons.className = "lesson_buttons";
+            // bookButton.className = "btn btn__book-lesson";
+            unBookButton.className = "btn btn__unbook-lesson"
+
+    wrapper.append(description, participants, buttons);
+            description.append(headline, img, timeSpan);
+            participants.append(maxParticipantsSpan, currentParticipantsSpan);
+            buttons.append(reservButton, unBookButton);
+
+    if (currentParticipants === maxParticipants) {
+        const allBooked = document.createElement("div")
+        allBooked.innerText = "Все места на занятии заняты."
+        allBooked.className = "allBooked";
+        wrapper.append(allBooked);
+    }
+    return wrapper;
 }

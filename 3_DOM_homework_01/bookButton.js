@@ -1,11 +1,15 @@
-import {incrementParticipantsNumber} from "./fakeAPI.js";
+import {getLessonByID, incrementParticipantsNumber} from "./fakeAPI.js";
+import {createLesson} from "./createLesson.js";
 
-const bookButton = (lessonID, buttonStatus) =>
-    function callback() {
+export const bookButton = (lessonID) => {
+    const button = document.createElement("button");
+    button.innerText = "Записаться";
+    button.className = "btn btn__book-lesson";
+
+    button.addEventListener("click", () => {
         incrementParticipantsNumber(lessonID);
-    }
-
-    return(
-        `<button ${buttonStatus}`
-    )
+        console.log(createLesson(getLessonByID(lessonID)))
+        console.log("done!")
+    })
+    return button;
 }

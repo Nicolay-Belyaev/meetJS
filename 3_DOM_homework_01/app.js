@@ -1,6 +1,6 @@
-import {createLesson} from "./createLesson.js";
 import {getAllLessons} from "./fakeAPI.js";
+import {createLesson} from "./createLesson.js";
 
 const body = document.querySelector("body")
 const lessons = getAllLessons();
-lessons.forEach((lesson) => body.insertAdjacentHTML("beforeend", createLesson(lesson)));
+lessons.forEach((lesson) => body.append(createLesson(lesson)));
