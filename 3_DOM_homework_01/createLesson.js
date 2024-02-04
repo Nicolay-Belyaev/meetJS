@@ -1,6 +1,11 @@
-const body = document.querySelector("body");
+export const createLesson = ({name, time, maxParticipants, currentParticipants, imgPath}) => {
+    let btnStatus;
+    let allBooked = "";
+    if (currentParticipants === maxParticipants) {
+        btnStatus = "disabled";
+        allBooked = "<div class='allBooked'>Все места на занятии заняты</div>"
+    }
 
-const renderLesson = ({name, time, maxParticipants, currentParticipants, imgPath}) => {
     return(
         `<div class="wrapper">` +
         `    <div class="lesson_description">` +
@@ -13,13 +18,10 @@ const renderLesson = ({name, time, maxParticipants, currentParticipants, imgPath
         `        <span class="lesson_participants-current">Участников сейчас: ${currentParticipants}</span>`+
         `    </div>`+
         `    <div class="lesson_buttons">` +
-        `        <button class="btn btn__book-lesson">Записаться</button>`+
-        `        <button class="btn btn__unbook-lesson">отменить запись</button>`+
+        `        <button ${btnStatus} class="btn btn__book-lesson">Записаться</button>`+
+        `        <button disabled class="btn btn__unbook-lesson">отменить запись</button>`+
         `    </div>`+
+        `    ${allBooked}` +
         `</div>`
     )
 }
-
-
-mockData.forEach((lesson) => body.insertAdjacentHTML("beforeend", renderLesson(lesson)))
-
