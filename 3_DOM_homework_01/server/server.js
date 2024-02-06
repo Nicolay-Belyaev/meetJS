@@ -14,7 +14,6 @@ server.use(
 
 server.get('/allLessons', (req, res) => {
     res.send(fs.readFileSync(mockDataPath));
-    console.log("get user!")
 })
 
 server.get('/lesson/:id', (req, res) => {
