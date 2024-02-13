@@ -1,5 +1,5 @@
 const baseUrl = "https://api.unsplash.com";
-const APIkey = "OdudFgs7KAS-VaDAWri16MxDiBhxKOhEPrY8khnyZSM";
+const APIkey = "PLACE YOOR KEY";
 const fetchRandomImage = async () => {
     return (await fetch(`${baseUrl}/photos/random`, {
         method: "GET",
