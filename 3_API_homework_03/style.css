@@ -1,0 +1,11 @@
+.liked {
+    color: red;
+}
+
+.modal_wrapper {
+    position: absolute;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    z-index: 1000;
+}
