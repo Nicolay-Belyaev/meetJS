@@ -1,8 +1,6 @@
 import {fetchRandomImage} from "./API.js";
-import {createCard} from "./utils.js";
-
+import {createCard} from "./createCard.js";
 
 const randomPhoto = await fetchRandomImage();
-console.log(randomPhoto)
 document.body.append(createCard(randomPhoto));
 

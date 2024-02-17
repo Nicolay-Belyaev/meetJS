@@ -1,11 +1,40 @@
 .liked {
-    color: red;
+  color: red;
 }
 
-.modal_wrapper {
-    position: absolute;
-    display: flex;
-    justify-self: center;
-    align-self: center;
-    z-index: 1000;
+.modal__wrapper {
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  margin-left: -250px;
+  margin-top: -300px;
+  left: 50%;
+  top: 50%;
+  border-radius: 4px;
+  border: black solid 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+.modal__message {
+  width: 400px;
+  margin-bottom: 15px;
+}
+.modal__input {
+  width: 400px;
+  height: 40px;
+  margin-bottom: 15px;
+}
+.modal__button {
+  width: 410px;
+  height: 40px;
+}
+.modal__close {
+  position: relative;
+  left: 45%;
+  bottom: 5%;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */
