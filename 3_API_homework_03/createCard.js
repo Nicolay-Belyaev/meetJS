@@ -1,31 +1,42 @@
 import {fetchLike} from "./API.js";
 import {createAuthModal} from "./createAuthModal.js";
 
-export const createCard = ({id, urls, user, liked_by_user}) => {
+export const createCard = ({id, urls, user, liked_by_user, likes}) => {
     const wrapper = document.createElement("div");
     const img = document.createElement("img");
     const data = document.createElement("div");
     const name = document.createElement("span");
     const like = document.createElement("span");
+    const counter = document.createElement("span")
+
+    like.className = "card__like";
+
+    data.className = "card__data";
 
     img.src = `${urls.small}`;
     name.innerText = `${user?.first_name } ${user?.last_name}`;
     like.innerText = "Like"
-    liked_by_user ? like.classList.add("liked") : like.classList.remove("liked"); // вынести в отдельную функцию
+    counter.innerText = likes;
+    liked_by_user ? like.classList.add("liked") : like.classList.remove("liked");
 
 
     like.addEventListener("click", async () => {
         if (localStorage.getItem("unsplashToken")) {
             const APIresponse = await fetchLike(id, liked_by_user);
-            console.log(APIresponse)
-            APIresponse.photo.liked_by_user ? like.classList.add("liked") : like.classList.remove("liked");
+            if (APIresponse.photo.liked_by_user) {
+                like.classList.add("liked")
+                counter.innerText = `${++likes}`;
+            } else {
+                like.classList.remove("liked");
+                counter.innerText = `${--likes}`;
+            }
             liked_by_user = !liked_by_user;
         } else {
             document.body.append(createAuthModal())
         }})
 
     wrapper.append(img, data);
-    data.append(name, like);
+    data.append(name, like, counter);
     return wrapper;
 }
 

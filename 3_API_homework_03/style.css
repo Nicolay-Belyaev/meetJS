@@ -37,4 +37,12 @@
   cursor: pointer;
 }
 
+.card__data {
+  display: flex;
+  gap: 10px;
+}
+.card__like {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=style.css.map */

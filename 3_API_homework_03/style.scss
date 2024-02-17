@@ -42,3 +42,14 @@ $width: 500px;
         cursor: pointer;
     }
 }
+
+
+.card {
+    &__data {
+        display: flex;
+        gap: 10px;
+    }
+    &__like {
+        cursor: pointer;
+    }
+}
