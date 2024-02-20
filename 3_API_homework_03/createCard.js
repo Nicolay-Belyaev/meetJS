@@ -9,9 +9,9 @@ export const createCard = ({id, urls, user, liked_by_user, likes}) => {
     const like = document.createElement("span");
     const counter = document.createElement("span")
 
-    like.className = "card__like";
-
     data.className = "card__data";
+    like.className = "card__like";
+    like.dataset.id = id;
 
     img.src = `${urls.small}`;
     name.innerText = `${user?.first_name } ${user?.last_name}`;
@@ -31,9 +31,19 @@ export const createCard = ({id, urls, user, liked_by_user, likes}) => {
                 counter.innerText = `${--likes}`;
             }
             liked_by_user = !liked_by_user;
+
+            const history = JSON.parse(localStorage.getItem("picHistory"));
+            history.forEach((pic) => {
+                if (pic.id == like.dataset.id) {
+                    pic.liked_by_user = !pic.liked_by_user;
+                    pic.liked_by_user ? pic.likes++ : pic.likes--;
+                }
+            })
+            localStorage.setItem("picHistory", JSON.stringify(history));
         } else {
             document.body.append(createAuthModal())
         }})
+
 
     wrapper.append(img, data);
     data.append(name, like, counter);
