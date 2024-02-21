@@ -1,6 +1,18 @@
 import {updateHeaders} from "./utils.js";
 import {APIkey, APIsecret, baseUrl, redirectURI} from "./CONSTANTS.js";
 
+export const fetchImageByID = async (id) => {
+    const imageByIDResponce = await fetch(`${baseUrl}/photos/${id}`, {
+        method: "GET",
+        ...updateHeaders()
+    });
+    if (!imageByIDResponce.ok) {
+        alert('Похоже, у нас что-то сломалось, зайдите попозже.');
+        return;
+    }
+    return await imageByIDResponce.json();
+}
+
 export const fetchRandomImage = async () => {
     const randomImageResponce = await fetch(`${baseUrl}/photos/random`, {
         method: "GET",
